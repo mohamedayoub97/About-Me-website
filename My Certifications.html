@@ -1,0 +1,337 @@
+<html><head><base href="https://aboutme.example.com/certifications.html">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certifications - Mohamed Ayoub Essalami</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        #bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.85);
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            background: linear-gradient(45deg, rgba(51, 153, 255, 0.4), rgba(255, 102, 102, 0.4));
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            animation: moveGradient 5s ease-in-out infinite;
+        }
+
+        .header h1 {
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+
+        @keyframes moveGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .certifications {
+            margin-top: 40px;
+        }
+
+        .certification {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .certification:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .certification h2 {
+            color: #333;
+            margin-top: 0;
+        }
+
+        .certification p {
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .certification .issuer {
+            font-style: italic;
+            color: #999;
+        }
+
+        .button {
+            background-color: #333;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 5px;
+            margin: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.3s;
+            position: relative;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .button:before,
+        .button:after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            z-index: -1;
+            background: linear-gradient(135deg, #ff0080, #ff8c00, #40e0d0);
+            background-size: 300% 300%;
+            border-radius: 5px;
+            transition: opacity 0.3s, transform 0.2s;
+            filter: blur(5px);
+            opacity: 0;
+            transform: scale(0.9);
+        }
+
+        .button:hover::before {
+            opacity: 1;
+            transform: scale(1.1);
+            animation: gradient 2s linear infinite;
+        }
+
+        .button:active {
+            transform: scale(0.95);
+            background-color: #555;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        .back-button {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div id="bg-animation"></div>
+    <div class="container">
+        <div class="header">
+            <h1>My Certifications</h1>
+            <p>A collection of my professional certifications and achievements</p>
+        </div>
+        
+        <div class="certifications">
+            <div class="certification">
+                <h2>Advanced Python Programming</h2>
+                <p>Completed an intensive course on advanced Python programming techniques, including data structures, algorithms, and object-oriented programming.</p>
+                <p class="issuer">Issued by: Coursera</p>
+                <p>Date: January 2023</p>
+            </div>
+
+            <div class="certification">
+                <h2>Machine Learning Fundamentals</h2>
+                <p>Mastered the basics of machine learning, including supervised and unsupervised learning algorithms, model evaluation, and practical implementation using scikit-learn.</p>
+                <p class="issuer">Issued by: edX</p>
+                <p>Date: March 2023</p>
+            </div>
+
+            <div class="certification">
+                <h2>Renewable Energy Technologies</h2>
+                <p>Comprehensive course covering various renewable energy sources, their applications, and the latest advancements in sustainable energy technologies.</p>
+                <p class="issuer">Issued by: MIT OpenCourseWare</p>
+                <p>Date: June 2023</p>
+            </div>
+
+            <div class="certification">
+                <h2>Advanced MATLAB for Engineers and Scientists</h2>
+                <p>In-depth training on using MATLAB for complex scientific computations, data analysis, and visualization in engineering applications.</p>
+                <p class="issuer">Issued by: MathWorks</p>
+                <p>Date: September 2023</p>
+            </div>
+
+            <div class="certification">
+                <h2>Quantum Computing Basics</h2>
+                <p>Introduction to quantum computing principles, quantum algorithms, and their potential applications in solving complex computational problems.</p>
+                <p class="issuer">Issued by: IBM Quantum</p>
+                <p>Date: November 2023</p>
+            </div>
+        </div>
+
+        <div class="back-button">
+            <a href="https://aboutme.example.com" class="button">Back to About Me</a>
+        </div>
+
+        <div class="copyright">
+            &copy; 2024 Mohamed Ayoub Essalami
+        </div>
+    </div>
+
+    <script>
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('bg-animation').appendChild(renderer.domElement);
+
+        const group = new THREE.Group();
+        scene.add(group);
+
+        function getRandomColor() {
+            return new THREE.Color(Math.random(), Math.random(), Math.random());
+        }
+
+        const shapes = [
+            new THREE.IcosahedronGeometry(1, 0),
+            new THREE.OctahedronGeometry(0.8, 0),
+            new THREE.TetrahedronGeometry(0.6, 0),
+            new THREE.TorusGeometry(0.5, 0.2, 16, 100),
+            new THREE.ConeGeometry(0.5, 1, 32),
+            new THREE.DodecahedronGeometry(0.7, 0),
+            new THREE.TorusKnotGeometry(0.4, 0.1, 64, 8),
+            new THREE.SphereGeometry(0.5, 32, 32),
+            new THREE.CylinderGeometry(0.3, 0.3, 1, 32),
+            new THREE.RingGeometry(0.3, 0.5, 32)
+        ];
+
+        for (let i = 0; i < 50; i++) {
+            const geometry = shapes[Math.floor(Math.random() * shapes.length)];
+            const material = new THREE.MeshPhongMaterial({
+                color: getRandomColor(),
+                shininess: 100,
+                transparent: true,
+                opacity: 0.7
+            });
+            const mesh = new THREE.Mesh(geometry, material);
+
+            mesh.position.set(
+                Math.random() * 30 - 15,
+                Math.random() * 30 - 15,
+                Math.random() * 30 - 15
+            );
+            mesh.rotation.set(
+                Math.random() * 2 * Math.PI,
+                Math.random() * 2 * Math.PI,
+                Math.random() * 2 * Math.PI
+            );
+            mesh.scale.setScalar(Math.random() * 0.5 + 0.5);
+            group.add(mesh);
+        }
+
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
+
+        const pointLight = new THREE.PointLight(0xffffff, 1);
+        pointLight.position.set(5, 5, 5);
+        scene.add(pointLight);
+
+        function createFunctionGraph(func, color, xMin, xMax, zOffset) {
+            const points = [];
+            for (let x = xMin; x <= xMax; x += 0.1) {
+                const y = func(x);
+                points.push(new THREE.Vector3(x, y, zOffset));
+            }
+            const geometry = new THREE.BufferGeometry().setFromPoints(points);
+            const line = new THREE.Line(geometry, new THREE.LineBasicMaterial({ color: color }));
+            group.add(line);
+        }
+
+        createFunctionGraph(x => Math.sin(x), 0xff0000, -Math.PI, Math.PI, 0);
+        createFunctionGraph(x => Math.cos(x), 0x00ff00, -Math.PI, Math.PI, 1);
+        createFunctionGraph(x => Math.tan(x), 0x0000ff, -Math.PI / 2, Math.PI / 2, 2);
+        createFunctionGraph(x => x * x, 0xffff00, -2, 2, 3);
+        createFunctionGraph(x => Math.exp(x), 0xff00ff, -2, 2, 4);
+        createFunctionGraph(x => Math.log(x + 3), 0x00ffff, -2, 2, 5);
+
+        const loader = new THREE.FontLoader();
+        loader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', function(font) {
+            const constants = [
+                'h', 'c', 'G', 'e', 'k_B', 'N_A',
+                'μ_0', 'ε_0', 'R', 'σ', 'α'
+            ];
+
+            constants.forEach((constant, index) => {
+                const textGeometry = new THREE.TextGeometry(constant, {
+                    font: font,
+                    size: 0.5,
+                    height: 0.1,
+                });
+                const textMaterial = new THREE.MeshPhongMaterial({color: getRandomColor()});
+                const textMesh = new THREE.Mesh(textGeometry, textMaterial);
+
+                textMesh.position.set(
+                    Math.random() * 30 - 15,
+                    Math.random() * 30 - 15,
+                    Math.random() * 30 - 15
+                );
+                textMesh.rotation.set(
+                    Math.random() * 2 * Math.PI,
+                    Math.random() * 2 * Math.PI,
+                    Math.random() * 2 * Math.PI
+                );
+
+                group.add(textMesh);
+            });
+        });
+
+        camera.position.z = 20;
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            group.rotation.x += 0.001;
+            group.rotation.y += 0.002;
+
+            group.children.forEach((mesh) => {
+                if (mesh instanceof THREE.Mesh) {
+                    mesh.rotation.x += 0.01;
+                    mesh.rotation.y += 0.01;
+                }
+            });
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body></html>

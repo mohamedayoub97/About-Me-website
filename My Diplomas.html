@@ -1,0 +1,264 @@
+<html><head><base href="https://aboutme.example.com/diplomas.html">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Diplomas - Mohamed Ayoub Essalami</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        #bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.85);
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            background: linear-gradient(45deg, rgba(51, 153, 255, 0.4), rgba(255, 102, 102, 0.4));
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            animation: moveGradient 5s ease-in-out infinite;
+        }
+
+        .header h1 {
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+
+        @keyframes moveGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .diploma {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .diploma:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .diploma h2 {
+            color: #333;
+            margin-top: 0;
+        }
+
+        .diploma p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .diploma .date {
+            font-style: italic;
+            color: #999;
+        }
+
+        .back-button {
+            display: inline-block;
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+
+        .back-button:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div id="bg-animation"></div>
+    <div class="container">
+        <div class="header">
+            <h1>My Diplomas</h1>
+            <p>A showcase of my academic achievements</p>
+        </div>
+
+        <div class="diploma">
+            <h2>Master's Degree in Innovative Materials and Energy Management</h2>
+            <p>Graduated with highest honors, ranking first in the class</p>
+            <p>University of Gafsa, Tunisia</p>
+            <p class="date">Completed: September 2022</p>
+        </div>
+
+        <div class="diploma">
+            <h2>Bachelor's Degree in Fundamental Physics</h2>
+            <p>Graduated as the top student for all three years</p>
+            <p>University of Gafsa, Tunisia</p>
+            <p class="date">Completed: June 2020</p>
+        </div>
+
+        <div class="diploma">
+            <h2>Baccalaureate in Experimental Sciences</h2>
+            <p>Graduated with honors, specializing in physics and mathematics</p>
+            <p>Lycée Pilote de Gafsa, Tunisia</p>
+            <p class="date">Completed: June 2017</p>
+        </div>
+
+        <a href="https://aboutme.example.com" class="back-button">Back to About Me</a>
+    </div>
+
+    <script>
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('bg-animation').appendChild(renderer.domElement);
+
+        const group = new THREE.Group();
+        scene.add(group);
+
+        function getRandomColor() {
+            return new THREE.Color(Math.random(), Math.random(), Math.random());
+        }
+
+        const shapes = [
+            new THREE.IcosahedronGeometry(1, 0),
+            new THREE.OctahedronGeometry(0.8, 0),
+            new THREE.TetrahedronGeometry(0.6, 0),
+            new THREE.TorusGeometry(0.5, 0.2, 16, 100),
+            new THREE.ConeGeometry(0.5, 1, 32),
+            new THREE.DodecahedronGeometry(0.7, 0),
+            new THREE.TorusKnotGeometry(0.4, 0.1, 64, 8),
+            new THREE.SphereGeometry(0.5, 32, 32),
+            new THREE.CylinderGeometry(0.3, 0.3, 1, 32),
+            new THREE.RingGeometry(0.3, 0.5, 32)
+        ];
+
+        for (let i = 0; i < 50; i++) {
+            const geometry = shapes[Math.floor(Math.random() * shapes.length)];
+            const material = new THREE.MeshPhongMaterial({
+                color: getRandomColor(),
+                shininess: 100,
+                transparent: true,
+                opacity: 0.7
+            });
+            const mesh = new THREE.Mesh(geometry, material);
+
+            mesh.position.set(
+                Math.random() * 30 - 15,
+                Math.random() * 30 - 15,
+                Math.random() * 30 - 15
+            );
+            mesh.rotation.set(
+                Math.random() * 2 * Math.PI,
+                Math.random() * 2 * Math.PI,
+                Math.random() * 2 * Math.PI
+            );
+            mesh.scale.setScalar(Math.random() * 0.5 + 0.5);
+            group.add(mesh);
+        }
+
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
+
+        const pointLight = new THREE.PointLight(0xffffff, 1);
+        pointLight.position.set(5, 5, 5);
+        scene.add(pointLight);
+
+        function createFunctionGraph(func, color, xMin, xMax, zOffset) {
+            const points = [];
+            for (let x = xMin; x <= xMax; x += 0.1) {
+                const y = func(x);
+                points.push(new THREE.Vector3(x, y, zOffset));
+            }
+            const geometry = new THREE.BufferGeometry().setFromPoints(points);
+            const line = new THREE.Line(geometry, new THREE.LineBasicMaterial({ color: color }));
+            group.add(line);
+        }
+
+        createFunctionGraph(x => Math.sin(x), 0xff0000, -Math.PI, Math.PI, 0);
+        createFunctionGraph(x => Math.cos(x), 0x00ff00, -Math.PI, Math.PI, 1);
+        createFunctionGraph(x => Math.tan(x), 0x0000ff, -Math.PI / 2, Math.PI / 2, 2);
+        createFunctionGraph(x => x * x, 0xffff00, -2, 2, 3);
+        createFunctionGraph(x => Math.exp(x), 0xff00ff, -2, 2, 4);
+        createFunctionGraph(x => Math.log(x + 3), 0x00ffff, -2, 2, 5);
+
+        const loader = new THREE.FontLoader();
+        loader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', function(font) {
+            const constants = [
+                'h', 'c', 'G', 'e', 'k_B', 'N_A',
+                'μ_0', 'ε_0', 'R', 'σ', 'α'
+            ];
+
+            constants.forEach((constant, index) => {
+                const textGeometry = new THREE.TextGeometry(constant, {
+                    font: font,
+                    size: 0.5,
+                    height: 0.1,
+                });
+                const textMaterial = new THREE.MeshPhongMaterial({color: getRandomColor()});
+                const textMesh = new THREE.Mesh(textGeometry, textMaterial);
+
+                textMesh.position.set(
+                    Math.random() * 30 - 15,
+                    Math.random() * 30 - 15,
+                    Math.random() * 30 - 15
+                );
+                textMesh.rotation.set(
+                    Math.random() * 2 * Math.PI,
+                    Math.random() * 2 * Math.PI,
+                    Math.random() * 2 * Math.PI
+                );
+
+                group.add(textMesh);
+            });
+        });
+
+        camera.position.z = 20;
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            group.rotation.x += 0.001;
+            group.rotation.y += 0.002;
+
+            group.children.forEach((mesh) => {
+                if (mesh instanceof THREE.Mesh) {
+                    mesh.rotation.x += 0.01;
+                    mesh.rotation.y += 0.01;
+                }
+            });
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body></html>
