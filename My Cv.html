@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohamed Ayoub Essalami - Portfolio</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;500&display=swap');
+
+        /* Root color variables */
+        :root {
+            --primary-color: #1e272e;
+            --secondary-color: #00a8ff;
+            --accent-color: #fbc531;
+            --background-color: #dcdde1;
+            --text-color: #2f3640;
+            --section-bg: rgba(30, 39, 46, 0.8);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        header {
+            text-align: center;
+            padding: 4rem 0;
+            background: var(--primary-color);
+            color: white;
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 3s ease-in-out infinite alternate;
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            font-family: 'Roboto Slab', serif;
+            margin-bottom: 0.5rem;
+            animation: slideInLeft 1.5s ease-in-out infinite;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            animation: bounceIn 2s ease-in infinite alternate;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Section styling */
+        .section {
+            background-color: var(--section-bg);
+            border-radius: 12px;
+            padding: 3rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            color: white;
+            animation: fadeInUp 1.5s ease forwards;
+        }
+
+        h2 {
+            color: var(--accent-color);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            font-family: 'Roboto Slab', serif;
+            animation: pulse 1.5s infinite;
+        }
+
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 1.5s ease forwards;
+        }
+
+        /* Fade-in animation */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Skill section */
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            animation: fadeInUp 1.5s ease-in-out infinite alternate;
+        }
+
+        .skill {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 20px;
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+            animation: slideInRight 2s ease infinite alternate;
+        }
+
+        .skill:hover {
+            transform: scale(1.1);
+        }
+
+        /* Timeline for experience */
+        .experience-item {
+            margin-bottom: 2rem;
+            padding-left: 2rem;
+            border-left: 4px solid var(--accent-color);
+            animation: slideInUp 2s ease infinite alternate;
+        }
+
+        .experience-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            animation: rotateIn 1.5s ease-in infinite;
+        }
+
+        .experience-item p {
+            font-size: 1rem;
+            color: var(--accent-color);
+            animation: slideInLeft 1.5s ease infinite alternate;
+        }
+
+        /* Education section */
+        .education-item {
+            margin-bottom: 1.5rem;
+            animation: zoomIn 2s infinite alternate;
+        }
+
+        /* Interest section */
+        .interests {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            animation: fadeInLeft 1.5s infinite alternate;
+        }
+
+        .interests li {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.8rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            animation: rollIn 2s ease infinite alternate;
+        }
+
+        .interests li:hover {
+            transform: scale(1.05);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--primary-color);
+            color: white;
+            animation: zoomInDown 2s infinite alternate;
+        }
+
+        footer p {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        /* Button for download */
+        .download-cv {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .download-cv a {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            animation: slideInDown 2s ease infinite alternate;
+        }
+
+        .download-cv a:hover {
+            background-color: var(--secondary-color);
+        }
+
+        /* Keyframe animations */
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            0% {
+                opacity: 0;
+                transform: translateX(-100%);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            0% {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes bounceIn {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes rotateIn {
+            0% {
+                transform: rotate(-360deg);
+                opacity: 0;
+            }
+            100% {
+                transform: rotate(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes zoomIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes zoomInDown {
+            0% {
+                opacity: 0;
+                transform: scale(0.8) translateY(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            0% {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes rollIn {
+            0% {
+                opacity: 0;
+                transform: translateX(-100%) rotate(-360deg);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0) rotate(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            0% {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInDown {
+            0% {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 3D Canvas Background -->
+    <div id="canvas-container"></div>
+
+    <!-- Header Section -->
+    <header>
+        <h1>Mohamed Ayoub Essalami, MSc</h1>
+        <p>Third-year student in Energy Engineering and Environmental Technology</p>
+        <p>+216 94801112 | <a href="mailto:mohamedayyoubaslami@gmail.com">mohamedayyoubaslami@gmail.com</a> | <a href="https://www.linkedin.com/in/mohamed-ayoub-essalami" target="_blank">LinkedIn</a></p>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+
+        <!-- About Section -->
+        <section class="section fade-in">
+            <h2>About Me</h2>
+            <p>Highly accomplished third-year Energy Engineering and Environmental Technology student with top honors in both a Bachelor's in Fundamental Physics and a Master's in Innovative Materials and Energy Management. Skilled in COMSOL, ANSYS, Python, and MATLAB, with research focused on perovskites for magnetic refrigeration and solar cells. Certified in Data Science by Google, IBM, Microsoft, and Meta, I aim to apply my expertise in sustainable technologies and data-driven solutions to real-world energy challenges.</p>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="section fade-in">
+            <h2>Skills</h2>
+            <div class="skills">
+                <span class="skill">COMSOL</span>
+                <span class="skill">ANSYS</span>
+                <span class="skill">Python</span>
+                <span class="skill">MATLAB</span>
+                <span class="skill">JavaScript</span>
+                <span class="skill">R</span>
+                <span class="skill">Data Science</span>
+                <span class="skill">Energy Management</span>
+                <span class="skill">XRD</span>
+                <span class="skill">TGA</span>
+                <span class="skill">SQUID</span>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section class="section fade-in">
+            <h2>Professional Experience</h2>
+            <div class="experience-item">
+                <h3>Technician Intern - STEG Gafsa, Photovoltaic Research Laboratory</h3>
+                <p>August 1, 2024 – August 31, 2024 | Gafsa, Tunisia</p>
+                <ul>
+                    <li>Assisted with the installation and upkeep of photovoltaic systems</li>
+                    <li>Conducted system inspections and troubleshooting</li>
+                    <li>Collected and analyzed performance data</li>
+                    <li>Calibrated testing equipment for accurate measurements</li>
+                    <li>Documented experimental results in technical reports</li>
+                </ul>
+            </div>
+            <div class="experience-item">
+                <h3>Technician Intern - CPG | Compagnie des Phosphates de Gafsa</h3>
+                <p>July 1, 2024 – July 31, 2024 | Gafsa, Tunisia</p>
+                <ul>
+                    <li>Supported phosphate drying operations with maintenance and inspections</li>
+                    <li>Assisted with energy audits and performance analysis</li>
+                    <li>Prepared detailed reports on maintenance and energy efficiency</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section class="section fade-in">
+            <h2>Education</h2>
+            <div class="education-item">
+                <h3>Energy Engineering and Environmental Technology</h3>
+                <p>École Nationale d'Ingénieurs de Gafsa – Gafsa, Tunisia</p>
+                <p>2023 - Present (3rd Year)</p>
+            </div>
+            <div class="education-item">
+                <h3>Master's Degree in Innovative Materials and Energy Management</h3>
+                <p>Faculté des Sciences de Gafsa – Gafsa, Tunisia</p>
+                <p>2021 - 2023</p>
+            </div>
+            <div class="education-item">
+                <h3>Bachelor's Degree in Fundamental Physics</h3>
+                <p>Faculté des Sciences de Gafsa – Gafsa, Tunisia</p>
+                <p>2017 - 2020</p>
+            </div>
+        </section>
+
+        <!-- Interests Section -->
+        <section class="section fade-in">
+            <h2>Interests</h2>
+            <ul class="interests">
+                <li>Investigating Innovations in Renewable Energy</li>
+                <li>Pioneering Innovative Materials</li>
+                <li>Using Computational Techniques and Data Science</li>
+                <li>Promoting Environmental Sustainability</li>
+                <li>Engaging in Scientific Research</li>
+                <li>Creative Problem Solving</li>
+            </ul>
+        </section>
+
+        <!-- Download CV -->
+        <div class="download-cv fade-in">
+            <a href="C:\Users\moham\OneDrive\Desktop\PFE\ayoub\CV MAE.pdf"" target="_blank">Download My CV</a>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Mohamed Ayoub Essalami. All rights reserved.</p>
+    </footer>
+
+    <!-- Three.js 3D Background Animation -->
+    <script>
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+        // Create 3D rotating objects
+        const geometry = new THREE.TorusGeometry(1, 0.4, 16, 100);
+        const material = new THREE.MeshBasicMaterial({ color: 0xfbc531, wireframe: true });
+        const torus = new THREE.Mesh(geometry, material);
+        scene.add(torus);
+
+        camera.position.z = 5;
+
+        // Animation function
+        function animate() {
+            requestAnimationFrame(animate);
+            torus.rotation.x += 0.01;
+            torus.rotation.y += 0.01;
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Intersection Observer for fade-in effect
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
